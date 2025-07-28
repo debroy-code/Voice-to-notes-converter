@@ -10,8 +10,8 @@
     --card-foreground: 222.2 84% 4.9%;
     --popover: 0 0% 100%;
     --popover-foreground: 222.2 84% 4.9%;
-    --primary: 197 71% 73%;
-    --primary-foreground: 222.2 84% 4.9%;
+    --primary: 225 73% 57%;
+    --primary-foreground: 0 0% 98%;
     --secondary: 210 40% 96.1%;
     --secondary-foreground: 210 40% 9.8%;
     --muted: 210 40% 96.1%;
@@ -45,8 +45,8 @@
     --card-foreground: 210 40% 98%;
     --popover: 222.2 84% 4.9%;
     --popover-foreground: 210 40% 98%;
-    --primary: 197 71% 73%;
-    --primary-foreground: 222.2 84% 4.9%;
+    --primary: 225 73% 57%;
+    --primary-foreground: 0 0% 98%;
     --secondary: 217.2 32.6% 17.5%;
     --secondary-foreground: 210 40% 98%;
     --muted: 217.2 32.6% 17.5%;
@@ -82,6 +82,46 @@
     @apply bg-background text-foreground;
   }
 }
+
+@layer utilities {
+  .splash-screen {
+    animation: splash-screen-animation 3s forwards;
+  }
+  @keyframes splash-screen-animation {
+    0% {
+      opacity: 1;
+      transform: scale(0.9) translateY(0);
+      z-index: 50;
+    }
+    80% {
+      opacity: 1;
+      transform: scale(1) translateY(0);
+    }
+    100% {
+      opacity: 0;
+      transform: scale(1.1) translateY(-20px);
+      z-index: -1;
+    }
+  }
+
+  .splash-content {
+      animation: splash-content-animation 1.5s forwards;
+      animation-delay: 0.2s;
+      opacity: 0;
+  }
+
+  @keyframes splash-content-animation {
+      from {
+          opacity: 0;
+          transform: scale(0.8) rotateX(-20deg);
+      }
+      to {
+          opacity: 1;
+          transform: scale(1) rotateX(0deg);
+      }
+  }
+}
+
 
 @media print {
   body {

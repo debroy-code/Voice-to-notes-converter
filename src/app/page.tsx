@@ -1,7 +1,7 @@
 'use client';
 
 import { useState, useEffect, useCallback } from 'react';
-import { BookText, Printer, Loader2 } from 'lucide-react';
+import { BookText, Printer } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { useToast } from '@/hooks/use-toast';
 import { LectureCapture } from '@/components/lecture-capture';
@@ -9,13 +9,32 @@ import { NoteDisplay } from '@/components/note-display';
 import { transcribeAudio, TranscribeAudioInput } from '@/ai/flows/transcribe-audio';
 import { summarizeText, SummarizeTextInput } from '@/ai/flows/summarize-text';
 
+function SplashScreen() {
+    return (
+      <div className="splash-screen fixed inset-0 flex items-center justify-center bg-primary z-50 pointer-events-none" style={{ perspective: '1000px' }}>
+        <div className="splash-content flex flex-col items-center gap-4 text-primary-foreground">
+          <BookText className="h-24 w-24" />
+          <h1 className="text-5xl font-bold">NoteForge</h1>
+        </div>
+      </div>
+    );
+  }
+  
+
 export default function Home() {
   const { toast } = useToast();
+  const [showSplash, setShowSplash] = useState(true);
   const [transcription, setTranscription] = useState<string | null>(null);
   const [summary, setSummary] = useState<string | null>(null);
   const [isLoadingTranscription, setIsLoadingTranscription] = useState(false);
   const [isLoadingSummary, setIsLoadingSummary] = useState(false);
   const [audioDataUri, setAudioDataUri] = useState<string | null>(null);
+
+  useEffect(() => {
+    const timer = setTimeout(() => setShowSplash(false), 3000);
+    return () => clearTimeout(timer);
+  }, []);
+
 
   const isProcessing = isLoadingTranscription || isLoadingSummary;
 
@@ -82,6 +101,8 @@ export default function Home() {
   }, [transcription, summary, runSummarization]);
 
   return (
+    <>
+    {showSplash && <SplashScreen />}
     <div className="flex flex-col min-h-screen bg-background">
       <header className="no-print sticky top-0 z-10 w-full border-b bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
         <div className="container mx-auto flex h-16 items-center justify-between px-4">
@@ -93,7 +114,6 @@ export default function Home() {
             onClick={handleExport}
             disabled={!transcription && !summary}
             variant="default"
-            className="bg-accent text-accent-foreground hover:bg-accent/90"
           >
             <Printer className="mr-2 h-4 w-4" />
             Export Notes
@@ -131,5 +151,6 @@ export default function Home() {
         <p>Built with Next.js and Firebase Genkit.</p>
       </footer>
     </div>
+    </>
   );
 }
