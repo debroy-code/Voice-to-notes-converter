@@ -11,7 +11,7 @@ import { summarizeText, SummarizeTextInput } from '@/ai/flows/summarize-text';
 
 function SplashScreen() {
     return (
-      <div className="splash-screen fixed inset-0 flex items-center justify-center bg-primary z-50 pointer-events-none" style={{ perspective: '1000px' }}>
+      <div className="splash-screen fixed inset-0 flex items-center justify-center bg-primary z-50 pointer-events-none">
         <div className="splash-content flex flex-col items-center gap-4 text-primary-foreground">
           <BookText className="h-24 w-24" />
           <h1 className="text-5xl font-bold">NoteForge</h1>
@@ -31,7 +31,7 @@ export default function Home() {
   const [audioDataUri, setAudioDataUri] = useState<string | null>(null);
 
   useEffect(() => {
-    const timer = setTimeout(() => setShowSplash(false), 3000);
+    const timer = setTimeout(() => setShowSplash(false), 2500);
     return () => clearTimeout(timer);
   }, []);
 

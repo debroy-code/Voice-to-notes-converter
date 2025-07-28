@@ -10,19 +10,19 @@
     --card-foreground: 222.2 84% 4.9%;
     --popover: 0 0% 100%;
     --popover-foreground: 222.2 84% 4.9%;
-    --primary: 225 73% 57%;
+    --primary: 221 83% 53%;
     --primary-foreground: 0 0% 98%;
     --secondary: 210 40% 96.1%;
     --secondary-foreground: 210 40% 9.8%;
     --muted: 210 40% 96.1%;
     --muted-foreground: 210 40% 45.1%;
-    --accent: 225 73% 57%;
+    --accent: 221 83% 53%;
     --accent-foreground: 0 0% 98%;
     --destructive: 0 84.2% 60.2%;
     --destructive-foreground: 0 0% 98%;
     --border: 214.3 31.8% 91.4%;
     --input: 214.3 31.8% 91.4%;
-    --ring: 225 73% 57%;
+    --ring: 221 83% 53%;
     --chart-1: 12 76% 61%;
     --chart-2: 173 58% 39%;
     --chart-3: 197 37% 24%;
@@ -45,19 +45,19 @@
     --card-foreground: 210 40% 98%;
     --popover: 222.2 84% 4.9%;
     --popover-foreground: 210 40% 98%;
-    --primary: 225 73% 57%;
+    --primary: 221 83% 53%;
     --primary-foreground: 0 0% 98%;
     --secondary: 217.2 32.6% 17.5%;
     --secondary-foreground: 210 40% 98%;
     --muted: 217.2 32.6% 17.5%;
     --muted-foreground: 215 20.2% 65.1%;
-    --accent: 225 73% 57%;
+    --accent: 221 83% 53%;
     --accent-foreground: 210 40% 98%;
     --destructive: 0 62.8% 30.6%;
     --destructive-foreground: 210 40% 98%;
     --border: 217.2 32.6% 17.5%;
     --input: 217.2 32.6% 17.5%;
-    --ring: 225 73% 57%;
+    --ring: 221 83% 53%;
     --chart-1: 220 70% 50%;
     --chart-2: 160 60% 45%;
     --chart-3: 30 80% 55%;
@@ -85,39 +85,41 @@
 
 @layer utilities {
   .splash-screen {
-    animation: splash-screen-animation 3s forwards;
+    animation: splash-screen-animation 2.5s forwards ease-in-out;
   }
   @keyframes splash-screen-animation {
     0% {
       opacity: 1;
-      transform: scale(0.9) translateY(0);
+      transform: scale(1);
       z-index: 50;
     }
     80% {
       opacity: 1;
-      transform: scale(1) translateY(0);
+      transform: scale(1.05);
     }
     100% {
       opacity: 0;
-      transform: scale(1.1) translateY(-20px);
+      transform: scale(1.1);
       z-index: -1;
     }
   }
 
   .splash-content {
-      animation: splash-content-animation 1.5s forwards;
-      animation-delay: 0.2s;
+      animation: splash-content-animation 1.8s forwards ease-in-out;
       opacity: 0;
   }
 
   @keyframes splash-content-animation {
-      from {
+      0% {
           opacity: 0;
-          transform: scale(0.8) rotateX(-20deg);
+          transform: scale(0.9) translateY(10px);
       }
-      to {
+      50% {
+        opacity: 1;
+      }
+      100% {
           opacity: 1;
-          transform: scale(1) rotateX(0deg);
+          transform: scale(1) translateY(0);
       }
   }
 }
